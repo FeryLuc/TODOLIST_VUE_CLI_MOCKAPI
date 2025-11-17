@@ -28,7 +28,11 @@ const deleteOneById = async (id) => {
 };
 
 const updateOneById = async (todo) => {
-  await DB.updateOne(todo);
+  const response = await DB.updateOne(todo);
+  const index = todos.findIndex((t) => t.id === todo.id);
+  if (index !== -1) {
+    todos[index].content = todo.content;
+  }
 };
 
 const createOneTodo = async (newTodo) => {
@@ -64,6 +68,7 @@ watch(todos, () => {
         :todo="todo"
         @delete="deleteOneById"
         @toggle="updateOneById"
+        @update="updateOneById"
       />
 
       <!-- Message si aucun todo (à gérer en Vue) -->
