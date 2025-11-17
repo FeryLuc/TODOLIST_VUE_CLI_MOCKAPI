@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 const newTodo = ref('');
-const emit = defineEmits('add');
+const emit = defineEmits(['add']);
 function handleSubmit() {
   emit('add', newTodo.value);
   newTodo.value = '';
@@ -28,7 +28,6 @@ function handleSubmit() {
       <button
         type="submit"
         class="shrink-0 px-4 py-3 rounded-lg bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
-        @click.prevent="console.log(newTodo)"
       >
         Add
       </button>

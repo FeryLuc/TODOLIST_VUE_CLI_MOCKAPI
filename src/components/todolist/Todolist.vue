@@ -31,6 +31,12 @@ const updateOneById = async (todo) => {
   await DB.updateOne(todo);
 };
 
+const createOneTodo = async (newTodo) => {
+  if (newTodo == '') return;
+  const response = await DB.create(newTodo);
+  console.log(response);
+  todos.push(response);
+};
 watch(todos, () => {
   console.log('Changement dans todos :', todos);
 });
@@ -44,7 +50,7 @@ watch(todos, () => {
     <h2 id="todo-heading" class="sr-only">Todo list</h2>
 
     <!-- INPUT PRINCIPAL -->
-    <TodolistAddForm />
+    <TodolistAddForm @add="createOneTodo" />
     <!-- LISTE DES TODOS -->
     <ul
       class="m-4 divide-y divide-slate-200 text-slate-700"
