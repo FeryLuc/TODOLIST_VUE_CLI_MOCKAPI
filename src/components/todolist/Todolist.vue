@@ -27,6 +27,10 @@ const deleteOneById = async (id) => {
   console.log('deleted: ' + id);
 };
 
+const updateOneById = async (todo) => {
+  await DB.updateOne(todo);
+};
+
 watch(todos, () => {
   console.log('Changement dans todos :', todos);
 });
@@ -53,6 +57,7 @@ watch(todos, () => {
         :key="todo.id"
         :todo="todo"
         @delete="deleteOneById"
+        @toggle="updateOneById"
       />
 
       <!-- Message si aucun todo (à gérer en Vue) -->

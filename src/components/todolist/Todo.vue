@@ -1,9 +1,7 @@
 <script setup>
 const props = defineProps({ todo: Object });
-const deleteOneById = (id) => {
-  console.log('deleted: ' + id);
-};
-const emit = defineEmits(['delete']);
+
+const emit = defineEmits(['delete', 'toggle']);
 </script>
 <template>
   <li class="px-4 py-3 sm:px-5" role="listitem">
@@ -13,6 +11,7 @@ const emit = defineEmits(['delete']);
         :id="props.todo.id"
         type="checkbox"
         v-model="props.todo.isCompleted"
+        @change="emit('toggle', props.todo)"
         class="h-4 w-4 text-blue-600 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
       />
       <label
