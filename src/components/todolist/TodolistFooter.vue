@@ -1,5 +1,11 @@
 <script setup>
 defineProps({ todosLeft: Number });
+const emit = defineEmits([
+  'displayAll',
+  'displayActive',
+  'displayCompleted',
+  'clearCompleted',
+]);
 </script>
 <template>
   <!-- FOOTER DE LISTE -->
@@ -26,18 +32,21 @@ defineProps({ todosLeft: Number });
         <button
           class="px-3 py-1.5 text-sm rounded-full border border-slate-300 hover:border-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
           aria-pressed="true"
+          @click="emit('displayAll')"
         >
           All
         </button>
         <button
           class="px-3 py-1.5 text-sm rounded-full border border-slate-300 hover:border-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
           aria-pressed="false"
+          @click="emit('displayActive')"
         >
           Active
         </button>
         <button
           class="px-3 py-1.5 text-sm rounded-full border border-slate-300 hover:border-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
           aria-pressed="false"
+          @click="emit('displayCompleted')"
         >
           Completed
         </button>
@@ -47,6 +56,7 @@ defineProps({ todosLeft: Number });
       <div class="sm:ml-auto">
         <button
           class="text-sm text-slate-600 hover:text-slate-800 underline underline-offset-2 decoration-slate-300 hover:decoration-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
+          @click="emit('clearCompleted')"
         >
           Clear completed
         </button>

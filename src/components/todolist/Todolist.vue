@@ -10,10 +10,9 @@ const todos = reactive([]);
 onMounted(async () => {
   DB.setApiUrl('https://691b0e532d8d7855757146d3.mockapi.io/');
   todos.splice(todos.length, 0, ...(await DB.findAll()));
-  // todos.value = await DB.findAll();
   console.table(todos);
 });
-
+//affiche les non complétées totals. filtrer sur filteredTodos pour changer le count en fonction des filtre cliqué.
 const todosLeft = computed(() => {
   return todos.filter((t) => t.isCompleted === false).length;
 });
@@ -41,6 +40,50 @@ const createOneTodo = async (newTodo) => {
   console.log(response);
   todos.push(response);
 };
+//Footer actions
+const filter = ref('all');
+const filteredTodos = computed(() => {
+  switch (filter.value) {
+    case 'all':
+      return todos;
+      break;
+    case 'active':
+      return todos.filter((t) => !t.isCompleted);
+      break;
+    case 'completed':
+      return todos.filter((t) => t.isCompleted);
+      break;
+
+    default:
+      break;
+  }
+});
+const displayAllTodos = () => {
+  filter.value = 'all';
+};
+const displayActiveTodos = () => {
+  filter.value = 'active';
+};
+const displayCompletedTodos = () => {
+  filter.value = 'completed';
+};
+const clearCompletedTodos = async () => {
+  // Récupérer uniquement les todos complétés
+  const completedTodos = todos.filter((t) => t.isCompleted);
+
+  // Boucle sur les complétés et supprime en DB
+  for (const todo of completedTodos) {
+    await DB.deleteOneById(todo.id);
+  }
+
+  // Supprimer du tableau local
+  for (let i = todos.length - 1; i >= 0; i--) {
+    if (todos[i].isCompleted) {
+      todos.splice(i, 1);
+    }
+  }
+};
+
 watch(todos, () => {
   console.log('Changement dans todos :', todos);
 });
@@ -63,7 +106,7 @@ watch(todos, () => {
     >
       <!-- ITEM (exemple) -->
       <Todo
-        v-for="todo in todos"
+        v-for="todo in filteredTodos"
         :key="todo.id"
         :todo="todo"
         @delete="deleteOneById"
@@ -82,7 +125,13 @@ watch(todos, () => {
     </ul>
 
     <!-- FOOTER DE LISTE -->
-    <TodolistFooter :todosLeft="todosLeft" />
+    <TodolistFooter
+      :todosLeft="todosLeft"
+      @displayAll="displayAllTodos"
+      @displayActive="displayActiveTodos"
+      @displayCompleted="displayCompletedTodos"
+      @clearCompleted="clearCompletedTodos"
+    />
   </section>
 </template>
 <style scoped></style>
