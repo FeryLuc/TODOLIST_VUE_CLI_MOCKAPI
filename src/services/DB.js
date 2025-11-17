@@ -14,7 +14,7 @@ export default class DB {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         content: data.content,
-        isCompleted: data.isCompleted,
+        isCompleted: false,
       }),
     });
     return response.json();
