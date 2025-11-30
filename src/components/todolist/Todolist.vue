@@ -16,7 +16,7 @@ onMounted(async () => {
 const todosLeft = computed(() => {
   return todos.filter((t) => t.isCompleted === false).length;
 });
-
+//Main features
 const deleteOneById = async (id) => {
   await DB.deleteOneById(id);
   const index = todos.findIndex((t) => t.id === id);
@@ -25,7 +25,6 @@ const deleteOneById = async (id) => {
   }
   console.log('deleted: ' + id);
 };
-
 const updateOneById = async (todo) => {
   const response = await DB.updateOne(todo);
   const index = todos.findIndex((t) => t.id === todo.id);
@@ -33,7 +32,6 @@ const updateOneById = async (todo) => {
     todos[index].content = todo.content;
   }
 };
-
 const createOneTodo = async (newTodo) => {
   if (newTodo == '') return;
   const response = await DB.create(newTodo);
@@ -70,12 +68,10 @@ const displayCompletedTodos = () => {
 const clearCompletedTodos = async () => {
   // Récupérer uniquement les todos complétés
   const completedTodos = todos.filter((t) => t.isCompleted);
-
   // Boucle sur les complétés et supprime en DB
   for (const todo of completedTodos) {
     await DB.deleteOneById(todo.id);
   }
-
   // Supprimer du tableau local
   for (let i = todos.length - 1; i >= 0; i--) {
     if (todos[i].isCompleted) {

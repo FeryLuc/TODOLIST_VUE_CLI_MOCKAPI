@@ -1,38 +1,32 @@
-# todoList-vue-mockApi
+# TODOLIST_VUE_CLI_MOCKAPI
 
-This template should help get you started developing with Vue 3 in Vite.
+Petit projet Todo List en Vue.js.
 
-## Recommended IDE Setup
+---
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## 🚀 Description
 
-## Recommended Browser Setup
+Cette application est une Todo List simple et moderne construite avec :
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) 
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+- Vue.js (Vue 3)
+- Vite pour le bundling et le développement rapide
+- HTML5 et CSS3 (possibilité d’utiliser Tailwind ou CSS vanilla)
 
-## Customize configuration
+Elle permet de créer, modifier et marquer comme terminé et supprimer des tâches, avec une interface réactive et intuitive.
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+---
 
-## Project Setup
+## 📝 Fonctionnalités
 
-```sh
-npm install
-```
+- Ajouter une nouvelle tâche
+- Marquer une tâche comme terminée
+- Supprimer une tâche
+- Modifier une tâche en double cliquant
+- Filtrer les tâches
+- Responsive et légère
 
-### Compile and Hot-Reload for Development
+---
 
-```sh
-npm run dev
-```
+## 💻 MOCK API
 
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+Connectée à MockApi
