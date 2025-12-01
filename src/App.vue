@@ -7,7 +7,7 @@ import AppHeader from './components/AppHeader.vue';
 <template>
   <AppHeader />
   <main class="w-full max-w-xl mt-8 bg-slate-200 rounded-xl">
-    <Todolist />
+    <Todolist apiUrl="'https://691b0e532d8d7855757146d3.mockapi.io/'" />
   </main>
   <AppFooter />
 </template>
